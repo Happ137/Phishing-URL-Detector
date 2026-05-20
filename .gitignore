@@ -1,7 +1,6 @@
 venv/
 instance/
 __pycache__/
-*.pkl
 *.csv
 *.pyc
 peek.py
