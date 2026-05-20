@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Danger Log — Phishing URL Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page">
+        <div class="container">
+            <div class="history-header">
+                <h1>Danger Log</h1>
+                <a href="/" class="back-btn">Scan a URL</a>
+            </div>
+            <p class="subtitle">Previously detected dangerous URLs.</p>
+
+            {% if entries %}
+                {% for entry in entries %}
+                <div class="history-card">
+                    <div class="history-top">
+                        <p class="history-url">{{ entry.url }}</p>
+                        <span class="history-date">{{ entry.scanned_at.strftime('%b %d, %Y %H:%M') }}</span>
+                    </div>
+                    <div class="history-indicators">
+                        {% for indicator in entry.risk_indicators.split(' | ') %}
+                            <span class="indicator-tag">{{ indicator }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="empty-state">No dangerous URLs detected yet.</p>
+            {% endif %}
+        </div>
+        <p class="footer">Built for awareness — not a substitute for professional security tools.</p>
+    </div>
+</body>
+</html>

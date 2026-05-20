@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phishing URL Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page">
+        <div class="container">
+            <h1>Phishing URL Detector</h1>
+            <p class="subtitle">Paste a link and we'll inspect it for phishing patterns — instantly, privately, in your browser.</p>
+
+            <form action="/check" method="POST">
+                <input type="text" name="url" placeholder="https://example.com/login" class="url-input">
+                <button type="submit" class="scan-btn">Scan URL</button>
+            </form>
+
+            <div class="features">
+                <div class="feature-card">
+                    <span class="feature-label">TLS</span>
+                    <span class="feature-name">HTTPS check</span>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-label">DNS</span>
+                    <span class="feature-name">Domain analysis</span>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-label">AI-lite</span>
+                    <span class="feature-name">Pattern matching</span>
+                </div>
+            </div>
+        </div>
+        <p class="footer">Built for awareness — not a substitute for professional security tools.</p>
+        <a href="/history" class="history-link">View Danger Log →</a>
+    </div>
+</body>
+</html>

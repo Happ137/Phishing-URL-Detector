@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result — Phishing URL Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page">
+        <div class="container">
+
+            <div class="result-header">
+                <div class="verdict-left">
+                    {% if analysis.verdict == "Dangerous" %}
+                        <span class="shield danger">✕</span>
+                    {% else %}
+                        <span class="shield safe">✓</span>
+                    {% endif %}
+                    <div>
+                        <p class="risk-label">RISK ASSESSMENT</p>
+                        <h2 class="verdict {{ 'danger' if analysis.verdict == 'Dangerous' else 'safe' }}">
+                            {{ analysis.verdict }}
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="url-box">
+                <p class="url-label">Scanned URL</p>
+                <p class="url-value">{{ url }}</p>
+            </div>
+
+            {% if analysis.risk_indicators %}
+            <div class="indicators">
+                <p class="section-title danger">⚠ Risk Indicators ({{ analysis.risk_indicators|length }})</p>
+                {% for item in analysis.risk_indicators %}
+                <div class="indicator-item">• {{ item }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if analysis.positive_signals %}
+            <div class="indicators">
+                <p class="section-title safe">✓ Positive Signals</p>
+                {% for item in analysis.positive_signals %}
+                <div class="indicator-item">• {{ item }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <p class="disclaimer">Heuristic analysis only. Always exercise caution before clicking unknown links.</p>
+
+            <a href="/" class="back-btn">Check another URL</a>
+        </div>
+        <p class="footer">Built for awareness — not a substitute for professional security tools.</p>
+    </div>
+</body>
+</html>
